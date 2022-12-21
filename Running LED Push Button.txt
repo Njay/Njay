@@ -1,0 +1,133 @@
+// C++ code
+// Running LED by Kokoh & Arief
+
+int button = 2;
+int nilai;
+int count;
+int ledPins[] = {13, 12, 11, 10, 9};
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(button,INPUT);
+  pinMode(ledPins[0] , OUTPUT);
+  pinMode(ledPins[1] , OUTPUT);
+  pinMode(ledPins[2] , OUTPUT);
+  pinMode(ledPins[3] , OUTPUT);
+  pinMode(ledPins[4] , OUTPUT);
+}
+
+void loop()
+{
+  
+  nilai = digitalRead(button);
+  if (nilai == 1)
+  {count++;
+   delay(300);
+   if(count == 1) 
+   {
+     Bergantian();
+   }
+   if(count == 2)
+   {
+     Satusatu();
+   }
+   if(count == 3)
+   {
+     PingPong();
+   }
+   if(count == 4)
+   {
+     marching();
+   }
+   if(count == 5)
+   {
+     DeadLED();
+   }
+   if(count == 6)
+   {
+     AllLED();
+   }
+   else(count ==0);
+  }
+  
+}
+
+void Bergantian()
+{
+  int i;
+  int t = 500;
+  
+  for (i=0; i<=4; i= ++i)
+  {digitalWrite(ledPins[i], HIGH);
+   delay(t);}
+  
+  for (i=4; i>=0; i=--i)
+  {digitalWrite(ledPins[i], LOW);
+   delay(t);}
+  
+  delay(1000);
+}
+
+void Satusatu()
+{
+  int i;
+  int t=500;
+  
+  for (i=0; i<=4; i=++i)
+  {digitalWrite(ledPins[i],HIGH);
+   delay(t);
+   digitalWrite(ledPins[i],LOW);}
+  delay(1000);
+}
+
+void PingPong()
+{
+  int i;
+  int t=200;
+  
+  for (i=0; i<=4; i=++i)
+  {digitalWrite(ledPins[i],HIGH);
+   delay(t);
+   digitalWrite(ledPins[i],LOW);}
+  
+  for (i=4; i>=0; i=--i)
+  {digitalWrite(ledPins[i], HIGH);
+   delay(t);
+   digitalWrite(ledPins[i],LOW);}
+  delay(1000);
+}
+
+void marching()
+{
+  int i;
+  int t=1000;
+  
+  for (i=0; i<=2; i++)
+  {digitalWrite(ledPins[i],HIGH);
+   digitalWrite(ledPins[i+2],HIGH);
+   delay(t);}
+  
+  {digitalWrite(ledPins[i],LOW);
+   digitalWrite(ledPins[i+1],LOW);}
+  delay(1000);
+  
+}
+
+void AllLED()
+{
+  int i;
+  
+  for (i=0; i<=4; i++)
+  digitalWrite(ledPins[i], HIGH);
+
+}
+
+void DeadLED()
+{
+  int i;
+  
+  for (i=0; i<=4; i++)
+  digitalWrite(ledPins[i], LOW);
+
+}
+   
